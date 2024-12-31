@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Get Song</title>
+{% endblock %}
+
+{% block body %}
+<header><h1>Spotify Voice Controller</h1></header>
+<div class="container">
+    {% if message %}
+    <div class="message {% if 'error' in message.lower() %}error{% else %}success{% endif %}">
+        {{ message }}
+    </div>
+    {% endif %}
+
+    <div class="visualizer-container">
+        <canvas id="visualization-canvas"></canvas>
+        <div class="controls">
+            <button id="start">Start</button>
+        </div>
+    </div>
+    
+
+    <div id="message" class="message">Inicia el reconocimiento de voz y controla Spotify con comandos como: <span class="multiple-message"></span></div>
+
+    {% if track_info %}
+    <div class="track-info">
+        {% if track_info.error %}
+        <div class="error">{{ track_info.error }}</div>
+        {% else %}
+        <h3>Added to Queue:</h3>
+        <div class="track-details">
+            <div>Song: {{ track_info.name }}</div>
+            <div>Artist: {{ track_info.artist }}</div>
+            <div>Album: {{ track_info.album }}</div>
+        </div>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}
